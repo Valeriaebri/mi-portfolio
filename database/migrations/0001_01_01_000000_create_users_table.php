@@ -17,8 +17,11 @@ return new class extends Migration
          $table->string('apellidos')->nullable();
          $table->string('nif')->nullable();
          $table->string('email')->unique();
+         $table->string('password');
          $table->enum('role', ['admin', 'cliente'])->default('cliente');
          $table->integer('total_pedidos')->default(0);
+         $table->rememberToken(); // para el login
+         $table->timestamps();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

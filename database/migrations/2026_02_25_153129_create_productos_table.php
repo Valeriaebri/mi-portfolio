@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('ingredientes_inci')->nullable();
             $table->boolean('destacado')->default(false);
             $table->boolean('activo')->default(true);
+            $table->integer('stock')->default(0);
 
             $table->foreignId('categoria_id')
                 ->constrained('categorias')

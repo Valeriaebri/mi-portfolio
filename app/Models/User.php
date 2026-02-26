@@ -9,6 +9,12 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+      public function carrito(){
+          return $this->hasOne(Carrito::class);
+      }
+      public function pedidos(){
+          return $this->hasMany(Pedido::class);
+      }
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 

@@ -13,7 +13,8 @@ class CategoriaController extends Controller
     {
         $categorias = DB::table('categorias')
             ->orderBy('id', 'desc')
-            ->get();
+            ->paginate(10);
+
 
         return view('categorias.index', [
             'categorias' => $categorias

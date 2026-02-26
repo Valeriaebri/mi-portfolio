@@ -14,7 +14,8 @@ class ProductoController extends Controller
     {
         $productos = DB::table('productos')
             ->orderBy('id', 'desc')
-            ->get();
+            ->paginate(10);
+
 
         return view('productos.index', [
             'productos' => $productos

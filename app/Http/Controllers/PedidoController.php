@@ -15,7 +15,7 @@ class PedidoController extends Controller
         $pedidos = DB::table('pedidos')
             ->where('user_id', $userId)
             ->orderBy('id', 'desc')
-            ->get();
+            ->paginate(10);
 
         return view('pedidos.index', [
             'pedidos' => $pedidos

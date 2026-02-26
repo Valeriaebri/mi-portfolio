@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('descripcion')->nullable();
             $table->decimal('precio', 10, 2);
-            $table->text('modo-empleo')->nullable();
+            $table->text('modo_empleo')->nullable();
             $table->text('ingredientes_inci')->nullable();
             $table->boolean('destacado')->default(false);
             $table->boolean('activo')->default(true);

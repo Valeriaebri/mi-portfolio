@@ -5,24 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Categoria;
-use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
     // Mostrar todos los productos
     public function index()
     {
-        $productos = DB::table('productos')
+        $productos = Producto::with('categoria')
             ->orderBy('id', 'desc')
             ->paginate(10);
-
 
         return view('productos.index', [
             'productos' => $productos
         ]);
     }
 
-    // Formulario de crear producto
+    // Mostrar formulario de crear
     public function create()
     {
         $categorias = Categoria::all();
@@ -43,32 +41,27 @@ class ProductoController extends Controller
             $archivo->move(public_path('uploads'), $nombreImagen);
         }
 
-        DB::table('productos')->insert([
-            'nombre' => $request->input('nombre'),
-            'slug' => $request->input('nombre'),
-            'descripcion' => $request->input('descripcion'),
-            'precio' => $request->input('precio'),
-            'modo_empleo' => $request->input('modo_empleo'),
-            'ingredientes_inci' => $request->input('ingredientes_inci'),
-            'destacado' => $request->input('destacado') ? 1 : 0,
-            'activo' => $request->input('activo') ? 1 : 0,
-            'categoria_id' => $request->input('categoria_id'),
-            'imagen' => $nombreImagen,
-            'created_at' => now(),
-            'updated_at' => now()
+        Producto::create([
+            'nombre' => $request->nombre,
+            'slug' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'precio' => $request->precio,
+            'modo_empleo' => $request->modo_empleo,
+            'ingredientes_inci' => $request->ingredientes_inci,
+            'destacado' => $request->destacado ? 1 : 0,
+            'activo' => $request->activo ? 1 : 0,
+            'categoria_id' => $request->categoria_id,
+            'imagen' => $nombreImagen
         ]);
 
-        return redirect('/productos')->with('status', 'Producto creado');
+        return redirect()->route('productos.index')
+            ->with('status', 'Producto creado correctamente');
     }
 
-
-    // Formulario de editar producto
+    // Mostrar formulario de editar
     public function edit($id)
     {
-        $producto = DB::table('productos')
-            ->where('id', '=', $id)
-            ->first();
-
+        $producto = Producto::findOrFail($id);
         $categorias = Categoria::all();
 
         return view('productos.edit', [
@@ -80,7 +73,9 @@ class ProductoController extends Controller
     // Actualizar producto
     public function update(Request $request)
     {
-        $nombreImagen = $request->input('imagen_actual');
+        $producto = Producto::findOrFail($request->id);
+
+        $nombreImagen = $producto->imagen;
 
         if ($request->hasFile('imagen')) {
             $archivo = $request->file('imagen');
@@ -88,35 +83,30 @@ class ProductoController extends Controller
             $archivo->move(public_path('uploads'), $nombreImagen);
         }
 
-        DB::table('productos')
-            ->where('id', '=', $request->input('id'))
-            ->update([
-                'nombre' => $request->input('nombre'),
-                'slug' => $request->input('nombre'),
-                'descripcion' => $request->input('descripcion'),
-                'precio' => $request->input('precio'),
-                'modo_empleo' => $request->input('modo_empleo'),
-                'ingredientes_inci' => $request->input('ingredientes_inci'),
-                'destacado' => $request->input('destacado') ? 1 : 0,
-                'activo' => $request->input('activo') ? 1 : 0,
-                'categoria_id' => $request->input('categoria_id'),
-                'imagen' => $nombreImagen,
-                'updated_at' => now()
-            ]);
+        $producto->update([
+            'nombre' => $request->nombre,
+            'slug' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'precio' => $request->precio,
+            'modo_empleo' => $request->modo_empleo,
+            'ingredientes_inci' => $request->ingredientes_inci,
+            'destacado' => $request->destacado ? 1 : 0,
+            'activo' => $request->activo ? 1 : 0,
+            'categoria_id' => $request->categoria_id,
+            'imagen' => $nombreImagen
+        ]);
 
-        return redirect('/productos')->with('status', 'Producto actualizado');
+        return redirect()->route('productos.index')
+            ->with('status', 'Producto actualizado correctamente');
     }
-
 
     // Eliminar producto
     public function delete($id)
     {
-        DB::table('productos')
-            ->where('id', '=', $id)
-            ->delete();
+        $producto = Producto::findOrFail($id);
+        $producto->delete();
 
-        return redirect()
-            ->action([ProductoController::class, 'index'])
-            ->with('status', 'Producto borrado correctamente');
+        return redirect()->route('productos.index')
+            ->with('status', 'Producto eliminado correctamente');
     }
 }

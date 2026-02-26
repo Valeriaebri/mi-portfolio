@@ -4,17 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
-use Illuminate\Support\Facades\DB;
 
 class CategoriaController extends Controller
 {
     // Mostrar todas las categorías
     public function index()
     {
-        $categorias = DB::table('categorias')
-            ->orderBy('id', 'desc')
-            ->paginate(10);
-
+        $categorias = Categoria::orderBy('id', 'desc')->paginate(10);
 
         return view('categorias.index', [
             'categorias' => $categorias
@@ -31,21 +27,20 @@ class CategoriaController extends Controller
     public function save(Request $request)
     {
         Categoria::create([
-            'nombre' => $request->input('nombre'),
-            'slug' => $request->input('nombre'), // si no quieres slug, lo quitamos
-            'descripcion' => $request->input('descripcion'),
-            'activo' => $request->input('activo') ? 1 : 0
+            'nombre' => $request->nombre,
+            'slug' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'activo' => $request->activo ? 1 : 0
         ]);
 
-        return redirect()->action([CategoriaController::class, 'index']);
+        return redirect()->route('categorias.index')
+            ->with('status', 'Categoría creada correctamente');
     }
 
     // Mostrar formulario de editar
     public function edit($id)
     {
-        $categoria = DB::table('categorias')
-            ->where('id', '=', $id)
-            ->first();
+        $categoria = Categoria::findOrFail($id);
 
         return view('categorias.edit', [
             'categoria' => $categoria
@@ -55,29 +50,26 @@ class CategoriaController extends Controller
     // Actualizar categoría
     public function update(Request $request)
     {
-        DB::table('categorias')
-            ->where('id', '=', $request->input('id'))
-            ->update([
-                'nombre' => $request->input('nombre'),
-                'slug' => $request->input('nombre'),
-                'descripcion' => $request->input('descripcion'),
-                'activo' => $request->input('activo') ? 1 : 0
-            ]);
+        $categoria = Categoria::findOrFail($request->id);
 
-        return redirect()
-            ->action([CategoriaController::class, 'index'])
+        $categoria->update([
+            'nombre' => $request->nombre,
+            'slug' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'activo' => $request->activo ? 1 : 0
+        ]);
+
+        return redirect()->route('categorias.index')
             ->with('status', 'Categoría actualizada correctamente');
     }
 
     // Eliminar categoría
     public function delete($id)
     {
-        DB::table('categorias')
-            ->where('id', '=', $id)
-            ->delete();
+        $categoria = Categoria::findOrFail($id);
+        $categoria->delete();
 
-        return redirect()
-            ->action([CategoriaController::class, 'index'])
+        return redirect()->route('categorias.index')
             ->with('status', 'Categoría borrada correctamente');
     }
 }

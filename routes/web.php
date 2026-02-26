@@ -28,3 +28,8 @@ Route::get('/carrito', [CarritoController::class, 'index']);
 Route::get('/carrito/add/{id}', [CarritoController::class, 'add']);
 Route::get('/carrito/delete/{id}', [CarritoController::class, 'delete']);
 Route::post('/carrito/update', [CarritoController::class, 'update']);
+
+//pedidos
+Route::get('/pedidos', [PedidoController::class, 'index']);
+Route::get('/pedidos/crear', [PedidoController::class, 'crearPedido']);
+Route::get('/pedidos/detalle/{id}', [PedidoController::class, 'detalle']);

@@ -9,16 +9,20 @@ use App\Models\Categoria;
 class ProductoController extends Controller
 {
     // Mostrar todos los productos
+    public function general()
+    {
+        // TIENDA PÚBLICA
+        $productos = Producto::paginate(12);
+        return view('productos.general', compact('productos'));
+    }
+
     public function index()
     {
-        $productos = Producto::with('categoria')
-            ->orderBy('id', 'desc')
-            ->paginate(10);
-
-        return view('productos.index', [
-            'productos' => $productos
-        ]);
+        // PANEL ADMIN
+        $productos = Producto::with('categoria')->paginate(15);
+        return view('productos.index', compact('productos'));
     }
+
 
     // Mostrar formulario de crear
     public function create()
@@ -38,7 +42,7 @@ class ProductoController extends Controller
         if ($request->hasFile('imagen')) {
             $archivo = $request->file('imagen');
             $nombreImagen = time() . '_' . $archivo->getClientOriginalName();
-            $archivo->move(public_path('uploads'), $nombreImagen);
+            $archivo->move(public_path('img'), $nombreImagen);
         }
 
         Producto::create([
@@ -54,7 +58,7 @@ class ProductoController extends Controller
             'imagen' => $nombreImagen
         ]);
 
-        return redirect()->route('productos.index')
+        return redirect()->route('admin.productos')
             ->with('status', 'Producto creado correctamente');
     }
 
@@ -80,7 +84,7 @@ class ProductoController extends Controller
         if ($request->hasFile('imagen')) {
             $archivo = $request->file('imagen');
             $nombreImagen = time() . '_' . $archivo->getClientOriginalName();
-            $archivo->move(public_path('uploads'), $nombreImagen);
+            $archivo->move(public_path('img'), $nombreImagen);
         }
 
         $producto->update([
@@ -96,7 +100,7 @@ class ProductoController extends Controller
             'imagen' => $nombreImagen
         ]);
 
-        return redirect()->route('productos.index')
+        return redirect()->route('admin.productos')
             ->with('status', 'Producto actualizado correctamente');
     }
 
@@ -106,7 +110,7 @@ class ProductoController extends Controller
         $producto = Producto::findOrFail($id);
         $producto->delete();
 
-        return redirect()->route('productos.index')
+        return redirect()->route('admin.productos')
             ->with('status', 'Producto eliminado correctamente');
     }
 }

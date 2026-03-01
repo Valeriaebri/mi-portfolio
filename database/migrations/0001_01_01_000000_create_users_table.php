@@ -17,8 +17,12 @@ return new class extends Migration
          $table->string('apellidos')->nullable();
          $table->string('nif')->nullable();
          $table->string('email')->unique();
+         $table->string('password');
          $table->enum('role', ['admin', 'cliente'])->default('cliente');
          $table->integer('total_pedidos')->default(0);
+         $table->string('foto')->nullable();
+         $table->rememberToken(); // para el login
+         $table->timestamps();
         });
 
         // gestionar los enlaces de “he olvidado mi contraseña”.

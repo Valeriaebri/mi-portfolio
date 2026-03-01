@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pedido;
 use App\Models\Carrito;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PedidoController extends Controller
 {
@@ -31,18 +32,25 @@ class PedidoController extends Controller
             return redirect()->back()->with('status', 'El carrito está vacío');
         }
 
+        // Calcular total
+        $total = 0;
+        foreach ($carrito->productos as $producto) {
+            $total += $producto->precio * $producto->pivot->cantidad;
+        }
+
         // Crear pedido
         $pedido = Pedido::create([
             'user_id' => $userId,
             'estado' => 'pendiente',
             'tipo' => 'normal',
-            'total' => 0
+            'total' => $total
         ]);
 
         // Copiar productos del carrito al pedido
         foreach ($carrito->productos as $producto) {
             $pedido->productos()->attach($producto->id, [
-                'cantidad' => $producto->pivot->cantidad
+                'cantidad' => $producto->pivot->cantidad,
+                'precio_unitario' => $producto->precio
             ]);
         }
 
@@ -52,6 +60,7 @@ class PedidoController extends Controller
         return redirect()->route('pedidos.index')
             ->with('status', 'Pedido creado correctamente');
     }
+
 
     // Ver detalle de un pedido
     public function detalle($id)
@@ -63,4 +72,18 @@ class PedidoController extends Controller
             'productos' => $pedido->productos
         ]);
     }
+
+
+    public function pdf($id)
+    {
+        $pedido = Pedido::with('productos')->findOrFail($id);
+
+        $pdf = Pdf::loadView('pedidos.pdf', [
+            'pedido' => $pedido,
+            'productos' => $pedido->productos
+        ]);
+
+        return $pdf->download('pedido_'.$pedido->id.'.pdf');
+    }
+
 }

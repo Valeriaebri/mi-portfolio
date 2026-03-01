@@ -19,12 +19,13 @@ return new class extends Migration
             $table->decimal('precio', 10, 2);
             $table->text('modo_empleo')->nullable();
             $table->text('ingredientes_inci')->nullable();
-            $table->boolean('destacado')->default(false);//ndica si el producto aparece como destacado en la web.
-            $table->boolean('activo')->default(true);//Indica si el producto está disponible.
+            $table->boolean('destacado')->default(false);
+            $table->boolean('activo')->default(true);
+            $table->integer('stock')->default(0);
 
-            $table->foreignId('categoria_id')// crea una columna que guarda el id de la categoría.
-                ->constrained('categorias')//esta columna está relacionada con la tabla categorias → categorias.id
-                 ->onDelete('cascade');// si se borra una categoría, se borran automáticamente todos sus productos.
+            $table->foreignId('categoria_id')
+                ->constrained('categorias')
+                 ->onDelete('cascade');
             $table->timestamps();
         });
     }

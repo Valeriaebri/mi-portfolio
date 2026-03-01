@@ -9,6 +9,12 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+      public function carrito(){
+          return $this->hasOne(Carrito::class);
+      }
+      public function pedidos(){
+          return $this->hasMany(Pedido::class);
+      }
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -18,10 +24,16 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nombre',
+        'apellidos',
+        'nif',
         'email',
         'password',
+        'role',
+        'total_pedidos',
+        'foto'
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,7 +54,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+
         ];
     }
 }

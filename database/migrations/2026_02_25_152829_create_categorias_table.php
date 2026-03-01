@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('categorias', function (Blueprint $table) {
            $table->id();
            $table->string('nombre');
-           $table->string('slug')->nullable();
+           $table->string('slug')->nullable();//para q la url sea  crema-facial
            $table->text('descripcion')->nullable();
-           $table->boolean('activo')->default(true);
-           $table->timestamps();
+           $table->boolean('activo')->default(true);//activar o desactivar una categoría
+           $table->timestamps();//Crea automáticamente dos columnas:created_at → fecha de creación +updated_at → fecha de última actualización
+
+Laravel las gestiona solo.
         });
     }
 

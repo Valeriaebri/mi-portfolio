@@ -19,7 +19,7 @@ return new class extends Migration
            $table->boolean('activo')->default(true);//activar o desactivar una categoría
            $table->timestamps();//Crea automáticamente dos columnas:created_at → fecha de creación +updated_at → fecha de última actualización
 
-Laravel las gestiona solo.
+
         });
     }
 

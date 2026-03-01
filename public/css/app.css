@@ -1052,3 +1052,32 @@ label {
     }
 
 }
+
+.producto-img-wrapper {
+    padding: 25px;
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.producto-img-wrapper img {
+    width: 100%;
+    max-width: 320px;
+    object-fit: contain;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: transparent !important;
+}
+
+.producto-ficha.textura-1 .producto-img-wrapper { background: #dff85d22; }
+.producto-ficha.textura-2 .producto-img-wrapper { background: #9ead5022; }
+.producto-ficha.textura-3 .producto-img-wrapper { background: #55abe322; }
+.producto-ficha.textura-4 .producto-img-wrapper { background: #eb703022; }
+.producto-ficha.textura-5 .producto-img-wrapper { background: #e8506722; }
+.producto-ficha.textura-6 .producto-img-wrapper { background: #ffd80022; }
+.producto-ficha.textura-7 .producto-img-wrapper { background: #f840ce22; }
+.producto-ficha.textura-8 .producto-img-wrapper { background: #fe7d3322; }

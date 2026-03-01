@@ -25,21 +25,36 @@
             <div class="grid">
 
                 @php
-                    // Creamos un array de texturas del 1 al 8
-                    $texturas = range(1, 8);
+                    function texturaProducto($nombre) {
+                        $nombre = trim(strtolower($nombre));
 
-                    // Mezclamos el array para que NO se repitan
-                    shuffle($texturas);
+                        return match ($nombre) {
+                            'dua lime'        => 1,
+                            'kiwi minogue'    => 2,
+                            'cactus perry'    => 3,
+                            'piña turner',
+                            'pina turner'     => 4,
+                            'mango cyrus'     => 5,
+                            'elton lemon'     => 6,
+                            'grape kelly'     => 7,
+                            'mad orange',
+                            'madorange'       => 8,
+                            default           => 1,
+                        };
+                    }
                 @endphp
 
-                @foreach ($productos->reverse() as $index => $producto)
-                    <div class="card-producto textura-{{ $texturas[$index] }}">
+
+
+            @foreach ($productos->reverse() as $producto)
+                    <div class="card-producto textura-{{ texturaProducto($producto->nombre) }}">
                         <img src="/img/productos/{{ $producto->imagen }}" alt="{{ $producto->nombre }}">
                         <h3>{{ $producto->nombre }}</h3>
                         <p class="precio">{{ $producto->precio }} €</p>
                         <a href="/producto/{{ $producto->slug }}" class="btn-ver">Ver más</a>
                     </div>
                 @endforeach
+
 
             </div>
         </div>

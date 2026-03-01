@@ -37,7 +37,7 @@
                 <tr>
                     <td>
                         @if($producto->imagen)
-                            <img src="/img/{{ $producto->imagen }}" class="tabla-img">
+                            <img src="/img/productos/{{ $producto->imagen }}" class="tabla-img">
                         @else
                             <img src="/img/producto-placeholder.png" class="tabla-img">
                         @endif

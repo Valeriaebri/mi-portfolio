@@ -42,6 +42,7 @@ class AuthClienteController extends Controller
 
     public function register(Request $request)
     {
+
         $request->validate([
             'nombre' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',

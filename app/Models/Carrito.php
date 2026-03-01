@@ -15,15 +15,17 @@ class Carrito extends Model
         'user_id'
     ];
 
-    // 🔹 El carrito pertenece a un usuario
+    // El carrito pertenece a un usuario
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // 🔹 El carrito tiene muchos productos (tabla intermedia)
-    public function carritoProductos()
+    // Relación N:N con productos usando la tabla pivote carrito_producto
+    public function productos()
     {
-        return $this->hasMany(CarritoProducto::class);
+        return $this->belongsToMany(Producto::class, 'carrito_producto')
+            ->withPivot('cantidad')
+            ->withTimestamps();
     }
 }

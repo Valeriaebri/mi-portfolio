@@ -7,7 +7,7 @@
         <div class="footer-links">
 
             <ul>
-                <li><a href="#">Quiénes somos</a></li>
+                <li><a href="/quienessomos">Quiénes somos</a></li>
                 <li><a href="#">Nuestra filosofía</a></li>
                 <li><a href="#">Ingredientes</a></li>
                 <li><a href="#">Sostenibilidad</a></li>

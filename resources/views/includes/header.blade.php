@@ -12,13 +12,14 @@
             @endphp
 
             <div class="cuenta-dropdown">
-                <button class="cuenta-btn">
-                    PRODUCTOS
 
-                </button>
+                <a href="/productos" class="cuenta-btn">
+                    PRODUCTOS
+                </a>
+
                 <div class="cuenta-menu">
                     @foreach($categoriasMenu as $cat)
-                        <a href="/productos?categoria={{ $cat->slug }}">
+                        <a href="/categoria_user/{{ $cat->slug }}">
                             {{ $cat->nombre }}
                         </a>
                     @endforeach
@@ -68,7 +69,7 @@
                             <a href="/admin">Dashboard</a>
                             <a href="/admin/productos">Productos</a>
                             <a href="/admin/categorias">Categorías</a>
-                            <a href="/admin/pedidos">Pedidos</a>
+
 
                             <form action="/logout" method="POST" style="margin:0;">
                                 @csrf

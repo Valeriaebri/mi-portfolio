@@ -6,6 +6,7 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\AuthClienteController;
 use App\Http\Controllers\AdminAuthController;
+
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Models\Producto;
@@ -41,11 +42,12 @@ Route::get('/categorias-publico', function () {
 });
 
 // Productos por categoría
-Route::get('/categoria/{slug}', function ($slug) {
+Route::get('/categoria_user/{slug}', function ($slug) {
     $categoria = \App\Models\Categoria::where('slug', $slug)->firstOrFail();
     $productos = $categoria->productos()->where('activo', 1)->paginate(12);
-    return view('categorias.listado', compact('categoria', 'productos'));
+    return view('categorias_user.index', compact('categoria', 'productos'));
 });
+
 
 // Productos general
 
@@ -59,10 +61,7 @@ Route::get('/productos', function () {
 Route::get('/quienessomos', function () {
     return view('quienessomos.conocenos');
 });
-// Categoria cliente index
-Route::get('/categorias_user', function () {
-    return view('categorias_user.index');
-});
+
 // opiniones cliente index
 Route::get('/opiniones', function () {
     return view('opiniones.index');
@@ -71,6 +70,8 @@ Route::get('/opiniones', function () {
 Route::get('/carrito', function () {
     return view('carrito.index');
 });
+
+
 
 
 
@@ -96,7 +97,7 @@ Route::post('/logout', [AuthClienteController::class, 'logout'])->name('logout')
 | CARRITO FUNCIONAL
 |--------------------------------------------------------------------------
 */
-
+Route::get('/carrito', [CarritoController::class, 'index'])->name('carrito');
 Route::get('/carrito/add/{id}', [CarritoController::class, 'add']);
 Route::get('/carrito/delete/{id}', [CarritoController::class, 'delete']);
 Route::post('/carrito/update', [CarritoController::class, 'update']);
@@ -109,9 +110,22 @@ Route::post('/carrito/update', [CarritoController::class, 'update']);
 */
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos');
-    Route::get('/pedidos/crear', [PedidoController::class, 'crearPedido']);
-    Route::get('/pedidos/detalle/{id}', [PedidoController::class, 'detalle']);
+// 📌 Listado de pedidos del cliente
+    Route::get('/pedidos', [PedidoController::class, 'index'])
+        ->name('pedidos.index');
+
+// 📌 Crear pedido desde el carrito
+    Route::get('/pedidos/crear', [PedidoController::class, 'crearPedido'])
+        ->name('pedidos.crear');
+
+// 📌 Ver detalle de un pedido
+    Route::get('/pedidos/{id}', [PedidoController::class, 'detalle'])
+        ->name('pedidos.detalle');
+
+// 📌 Descargar PDF
+    Route::get('/pedidos/{id}/pdf', [PedidoController::class, 'pdf'])
+        ->name('pedidos.pdf');
+
 });
 
 
@@ -143,12 +157,24 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     | ADMIN - CATEGORÍAS
     |--------------------------------------------------------------------------
     */
-    Route::get('/categorias', [CategoriaController::class, 'index'])->name('admin.categorias');
-    Route::get('/categorias/create', [CategoriaController::class, 'create']);
-    Route::post('/categorias/save', [CategoriaController::class, 'save']);
-    Route::get('/categorias/edit/{id}', [CategoriaController::class, 'edit']);
-    Route::post('/categorias/update', [CategoriaController::class, 'update']);
-    Route::get('/categorias/delete/{id}', [CategoriaController::class, 'delete']);
+    Route::get('/categorias', [CategoriaController::class, 'index'])
+        ->name('categorias.index');
+
+    Route::get('/categorias/create', [CategoriaController::class, 'create'])
+        ->name('categorias.create');
+
+    Route::post('/categorias/save', [CategoriaController::class, 'save'])
+        ->name('categorias.save');
+
+    Route::get('/categorias/edit/{id}', [CategoriaController::class, 'edit'])
+        ->name('categorias.edit');
+
+    Route::post('/categorias/update', [CategoriaController::class, 'update'])
+        ->name('categorias.update');
+
+    Route::get('/categorias/delete/{id}', [CategoriaController::class, 'delete'])
+        ->name('categorias.delete');
+
 
     /*
     |--------------------------------------------------------------------------
@@ -162,13 +188,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/productos/update', [ProductoController::class, 'update']);
     Route::get('/productos/delete/{id}', [ProductoController::class, 'delete']);
 
-    /*
-    |--------------------------------------------------------------------------
-    | ADMIN - PEDIDOS
-    |--------------------------------------------------------------------------
-    */
-    Route::get('/pedidos', [PedidoController::class, 'adminIndex'])->name('admin.pedidos');
-    Route::get('/pedidos/detalle/{id}', [PedidoController::class, 'adminDetalle']);
+
 });
 
 

@@ -126,8 +126,7 @@ body {
 
 .cuenta-dropdown {
     position: relative;
-    display: flex;
-    align-items: center;
+    display: inline-block; /* evita huecos y cortes de hover */
 }
 
 .cuenta-btn {
@@ -149,7 +148,7 @@ body {
 
 .cuenta-menu {
     position: absolute;
-    top: calc(100% + 4px);
+    top: 100%; /* pegado al botón */
     left: 0;
     background: white;
     box-shadow: var(--shadow);
@@ -158,6 +157,7 @@ body {
     flex-direction: column;
     min-width: 180px;
     z-index: 20;
+    padding-top: 2px; /* evita huecos donde se pierde el hover */
 }
 
 .cuenta-menu a {
@@ -173,10 +173,11 @@ body {
     color: #dbab89;
 }
 
-.cuenta-dropdown:hover .cuenta-menu,
-.cuenta-menu:hover {
+/* Mantener abierto mientras el ratón esté en el botón o en el menú */
+.cuenta-dropdown:hover .cuenta-menu {
     display: flex;
 }
+
 
 .carrito-link {
     margin-right: -50px !important;
@@ -1081,3 +1082,6 @@ label {
 .producto-ficha.textura-6 .producto-img-wrapper { background: #ffd80022; }
 .producto-ficha.textura-7 .producto-img-wrapper { background: #f840ce22; }
 .producto-ficha.textura-8 .producto-img-wrapper { background: #fe7d3322; }
+
+
+

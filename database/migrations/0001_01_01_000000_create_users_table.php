@@ -20,6 +20,7 @@ return new class extends Migration
          $table->string('password');
          $table->enum('role', ['admin', 'cliente'])->default('cliente');
          $table->integer('total_pedidos')->default(0);
+         $table->string('foto')->nullable();
          $table->rememberToken(); // para el login
          $table->timestamps();
         });

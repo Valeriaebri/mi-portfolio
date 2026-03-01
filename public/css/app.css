@@ -1,0 +1,1340 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source "../**/*.blade.php";
+@source "../**/*.js";
+@source "../**/*.vue";
+
+
+/* ------------------------------
+   RESET FREE BEAUTY – BASE CSS
+--------------------------------*/
+
+:root {
+    --yellow: #ffd800;
+    --orange: #fe7d33;
+    --green: #9ead50;
+    --blue: #55abe3;
+    --pink: #ce5499;
+    --neutral: #efd6c2;
+
+    --text: #333;
+    --bg: #fafafa;
+
+    --radius: 10px;
+    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+}
+
+/* ------------------------------
+   HEADER
+--------------------------------*/
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: white;
+    box-shadow: var(--shadow);
+}
+
+
+.nav a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+    margin-left: 100px;
+}
+
+.nav a:hover {
+    color: burlywood;
+}
+
+
+
+
+/* CONTENEDOR GENERAL */
+
+.header__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* NAV SUPERIOR */
+.nav {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    margin-left: 0 !important; /* ajusta el número hasta que te guste */
+
+
+}
+
+/* ESTILO GENERAL PARA TODOS LOS LINKS */
+.nav a,
+.sidebar a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: 0.2s ease-in-out;
+}
+
+.nav a:hover,
+.sidebar a:hover {
+    color: #000;
+}
+
+.register-link {
+    display: flex;
+    align-items: center;
+}
+
+/* BOTÓN DE SALIR */
+.logout-btn {
+    background: #dbab89;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s ease-in-out;
+}
+
+.logout-btn:hover {
+    background: #dbab89;
+}
+
+/* SIDEBAR */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #fafafa;
+    padding: 20px;
+    border-right: 2px solid #e5e5e5;
+    height: 100%;
+}
+
+
+.nav {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: nowrap; /* evita que se parta en dos líneas */
+    white-space: nowrap; /* evita que "Quiénes somos" se rompa */
+}
+
+.nav a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400; /* REGULAR */
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: 0.2s ease-in-out;
+}
+
+.nav a:hover {
+    color: #dbab89; /* queda mejor con ese fondo */
+}
+
+
+
+.cuenta-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.cuenta-btn {
+    background: transparent;
+    font-family: 'Montserrat', sans-serif;
+    margin-left: 45px;
+    margin-right: 90px;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: 0.2s ease-in-out;
+}
+
+.cuenta-btn:hover {
+    color: #dbab89;
+}
+
+.cuenta-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    background: white;
+    box-shadow: var(--shadow);
+    border-radius: 6px;
+    display: none;
+    flex-direction: column;
+    min-width: 180px;
+    z-index: 20;
+}
+
+.cuenta-menu a {
+    padding: 10px 14px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 400;
+    transition: 0.2s ease-in-out;
+    border-radius: 6px;
+}
+
+.cuenta-menu a:hover {
+    color: #dbab89;
+}
+
+/* 🔥 ESTA ES LA LÍNEA QUE SOLUCIONA TU PROBLEMA */
+.cuenta-dropdown:hover .cuenta-menu,
+.cuenta-menu:hover {
+    display: flex;
+}
+
+
+/* ------------------------------
+   FOOTER
+--------------------------------*/
+
+.footer {
+    text-align: center;
+    padding: 30px;
+    margin-top: 40px;
+    background: white;
+    box-shadow: var(--shadow);
+}
+
+/* ------------------------------
+   CONTAINER
+--------------------------------*/
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+/* ------------------------------
+   TABLES
+--------------------------------*/
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+th, td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background: var(--neutral);
+    text-align: left;
+    font-weight: 700;
+}
+
+/* ------------------------------
+   BUTTONS
+--------------------------------*/
+
+.btn {
+    padding: 10px 18px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: burlywood;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: burlywood;
+}
+
+.btn-danger {
+    background: burlywood;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: burlywood;
+}
+
+/* ------------------------------
+   FORMS
+--------------------------------*/
+
+form {
+    background: white;
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border-radius: var(--radius);
+    border: 1px solid #ccc;
+    font-family: inherit;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* ------------------------------
+   RESPONSIVE
+--------------------------------*/
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav a {
+        display: block;
+        margin: 10px 0;
+    }
+}
+
+
+.titulo-seccion {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.tabla-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: var(--radius);
+}
+
+.alert.success {
+    background: #d4f8d4;
+    padding: 12px;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    border-left: 5px solid #4caf50;
+}
+
+.paginacion {
+    margin-top: 20px;
+}
+.titulo-seccion {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.alert.success {
+    background: #d4f8d4;
+    padding: 12px;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    border-left: 5px solid #4caf50;
+}
+
+.paginacion {
+    margin-top: 20px;
+}
+
+
+
+/* ------------------------------
+   CARRITO
+--------------------------------*/
+
+.form-inline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-cantidad {
+    width: 70px;
+    padding: 8px;
+    border-radius: var(--radius);
+    border: 1px solid #ccc;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 14px;
+}
+
+.carrito-total {
+    margin-top: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    text-align: right;
+}
+
+.btn-large {
+    padding: 14px 24px;
+    font-size: 18px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+/* ------------------------------
+   FICHA DE PRODUCTO
+--------------------------------*/
+
+.producto-ficha {
+    margin-top: 40px;
+}
+
+.producto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.producto-img img {
+    width: 100%;
+    max-width: 420px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.producto-info h1 {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.producto-precio {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 15px 0;
+    color: burlywood;
+}
+
+.producto-descripcion {
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+.producto-bloque {
+    background: white;
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 40px;
+}
+
+.producto-bloque h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* ------------------------------
+   RESPONSIVE
+--------------------------------*/
+
+@media (max-width: 768px) {
+    .producto-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .producto-img img {
+        margin: 0 auto;
+    }
+}
+
+
+/* ------------------------------
+   CATALOGO
+--------------------------------*/
+.card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.grid-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+
+/* ------------------------------
+   HOME – HERO
+--------------------------------*/
+
+.hero-home {
+    width: 100%;
+    padding: 140px 0 180px;
+    background: radial-gradient(
+        circle at center,
+        #f2d4be 0%,
+        #f7e2d6 45%,
+        #fffaf2 100%
+    );
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-logo {
+    width: 600px;
+    margin: 0 auto;
+    z-index: 10;
+    position: relative;
+}
+/* ------------------------------
+   HERO – PRODUCTOS FLOTANTES
+--------------------------------*/
+
+.hero-products {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-products .prod {
+    position: absolute;
+    width: 180px; /* tamaño realista según la referencia */
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.15));
+    opacity: 0.95;
+    transition: transform .3s ease;
+}
+
+/* Hover general */
+.hero-products .prod:hover {
+    transform: scale(1.06) rotate(4deg);
+}
+
+/* POSICIONES Y ROTACIONES EXACTAS SEGÚN LA IMAGEN ORIGINAL */
+
+/* Amarillo (Elton Lemon) – arriba izquierda */
+.prod1 {
+    top: 6%;
+    left: 12%;
+    transform: rotate(-22deg);
+}
+
+/* Verde (Dua Lime) – arriba derecha */
+.prod2 {
+    top: 4%;
+    right: 14%;
+    transform: rotate(18deg);
+}
+
+/* Azul (Cactus Perry) – abajo izquierda */
+.prod3 {
+    bottom: 18%;
+    left: 15%;
+    transform: rotate(-12deg);
+}
+
+/* Rosa (Grape Kelly) – abajo derecha */
+.prod4 {
+    bottom: 14%;
+    right: 18%;
+    transform: rotate(14deg);
+}
+
+/* Naranja (Mango Cyrus) – centro */
+.prod5 {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(20deg);
+}
+
+
+/* ------------------------------
+   HOME – GRID DE PRODUCTOS
+--------------------------------*/
+
+.productos-grid {
+    padding: 80px 0;
+}
+
+.grid-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+.card-producto {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    text-align: center;
+    transition: 0.25s ease;
+}
+
+.card-producto:hover {
+    transform: translateY(-5px);
+}
+
+.card-producto img {
+    width: 100%;
+    border-radius: var(--radius);
+    margin-bottom: 15px;
+}
+
+.card-producto h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.precio {
+    font-size: 18px;
+    font-weight: 700;
+    color: burlywood;
+    margin-bottom: 12px;
+}
+
+.btn-ver {
+    display: inline-block;
+    padding: 10px 18px;
+    background: burlywood;
+    color: white;
+    border-radius: var(--radius);
+    font-weight: 600;
+}
+
+.btn-ver:hover {
+    background: burlywood;
+}
+
+
+.card-producto {
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+.card-producto:hover::after {
+    opacity: 1; /* intensidad de la textura */
+}
+
+
+.textura-1::after { background-image: url('/img/texturas/textura- (1).png'); }
+.textura-2::after { background-image: url('/img/texturas/textura- (2).png'); }
+.textura-3::after { background-image: url('/img/texturas/textura- (3).png'); }
+.textura-4::after { background-image: url('/img/texturas/textura- (4).png'); }
+.textura-5::after { background-image: url('/img/texturas/textura- (5).png'); }
+.textura-6::after { background-image: url('/img/texturas/textura- (6).png'); }
+.textura-7::after { background-image: url('/img/texturas/textura- (7).png'); }
+.textura-8::after { background-image: url('/img/texturas/textura- (8).png'); }
+
+
+.card-producto {
+    position: relative;
+}
+
+/* Contenedor de la imagen para poder poner la textura encima */
+.card-producto img {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 320px; /* ajusta la altura a tu gusto */
+    object-fit: contain; /* recorta sin deformar */
+    border-radius: var(--radius);
+    margin-bottom: 15px;
+    background: white;
+}
+
+
+
+
+/* Textura SOLO encima de la imagen */
+.card-producto::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%; /* ajusta si tus imágenes son más altas o bajas */
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    z-index: 3;
+    pointer-events: none; /* evita que bloquee clics */
+}
+
+.card-producto:hover::after {
+    opacity: 0.25;
+}
+
+
+.card-producto {
+    position: relative;
+}
+
+
+
+.card-producto:hover::after {
+    opacity: 1;
+}
+
+
+
+
+
+
+/* ------------------------------
+   HEADER NUEVO (COMPATIBLE)
+--------------------------------*/
+
+.header {
+    width: 100%;
+    background: white;
+    box-shadow: var(--shadow);
+    padding: 18px 0;
+}
+
+.header__container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo img {
+    height: 50px;
+}
+
+.header__nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header__nav a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.header__nav a:hover {
+    color: burlywood;
+}
+
+.logout-form {
+    display: inline;
+}
+
+.logout-btn {
+    background: transparent;
+    border: none;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    color: burlywood;
+}
+
+
+
+
+
+/* --- TIENDA / SHOP --- */
+
+.shop-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.shop-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Imagen del producto */
+.shop-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    padding: 10px;
+}
+
+/* Nombre */
+.shop-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 12px 0 6px;
+}
+
+/* Precio */
+.shop-card .precio {
+    font-size: 18px;
+    font-weight: 700;
+    color: burlywood;
+    margin-bottom: 12px;
+}
+
+/* Botón */
+.shop-card .btn-ver {
+    display: inline-block;
+    padding: 10px 18px;
+    background: burlywood;
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.shop-card .btn-ver:hover {
+    background: #caa77a;
+}
+
+
+
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+@media (max-width: 900px) {
+    .shop-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .shop-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.shop-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.shop-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.shop-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    padding: 10px;
+}
+
+.shop-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.shop-card .subtitulo {
+    font-size: 14px;
+    font-weight: 600;
+    color: #777;
+    margin-bottom: 4px;
+}
+
+.shop-card .descripcion-corta {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+.shop-card .cantidad {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.shop-card .precio {
+    font-size: 18px;
+    font-weight: 700;
+    color: burlywood;
+    margin-bottom: 12px;
+}
+
+.shop-card .btn-ver {
+    display: inline-block;
+    padding: 10px 18px;
+    background: burlywood;
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.shop-card .btn-ver:hover {
+    background: #caa77a;
+}
+
+/* --- GRID 2 COLUMNAS --- */
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+@media (max-width: 900px) {
+    .shop-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- CARD ANCHA --- */
+.shop-card {
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.shop-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* --- CONTENIDO INTERNO: TEXTO IZQUIERDA + IMAGEN DERECHA --- */
+.shop-card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.shop-info {
+    flex: 1;
+}
+
+.shop-img {
+    flex: 0 0 200px;
+}
+
+.shop-img img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+}
+
+/* --- TIPOGRAFÍA --- */
+.shop-card h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.shop-card .descripcion-corta {
+    font-size: 15px;
+    color: #444;
+    margin-bottom: 12px;
+}
+
+.shop-card .precio {
+    font-size: 20px;
+    font-weight: 700;
+    color: burlywood;
+    margin-bottom: 15px;
+}
+
+.shop-card .btn-ver {
+    display: inline-block;
+    padding: 10px 18px;
+    background: burlywood;
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.shop-card .btn-ver:hover {
+    background: #caa77a;
+}
+
+/* --- COLORES SUAVES AUTOMÁTICOS PARA LAS CARDS --- */
+.shop-grid .shop-card:nth-child(1) { background: #f9ffd1; } /* amarillo suave */
+.shop-grid .shop-card:nth-child(2) { background: #fde7d8; } /* melocotón suave */
+.shop-grid .shop-card:nth-child(3) { background: #fcfdcc; } /* lima suave */
+.shop-grid .shop-card:nth-child(4) { background: #fff5cd; } /* crema suave */
+.shop-grid .shop-card:nth-child(5) { background: #ffe7e4; } /* coral suave */
+.shop-grid .shop-card:nth-child(6) { background: #fadcec; } /* rosa suave */
+.shop-grid .shop-card:nth-child(7) { background: #e9f5fd; } /* azul suave */
+.shop-grid .shop-card:nth-child(8) { background: #fffad9; } /* beige suave */
+
+/* --- TEXTO A JUEGO CON EL FONDO (TONO OSCURO) --- */
+.shop-grid .shop-card:nth-child(1) h3,
+.shop-grid .shop-card:nth-child(1) p { color: #6e6a00; } /* amarillo → oliva oscuro */
+
+.shop-grid .shop-card:nth-child(2) h3,
+.shop-grid .shop-card:nth-child(2) p { color: #8a4a3a; } /* melocotón → marrón suave */
+
+.shop-grid .shop-card:nth-child(3) h3,
+.shop-grid .shop-card:nth-child(3) p { color: #6b6d00; } /* lima → verde oscuro */
+
+.shop-grid .shop-card:nth-child(4) h3,
+.shop-grid .shop-card:nth-child(4) p { color: #7a6a00; } /* crema → dorado oscuro */
+
+.shop-grid .shop-card:nth-child(5) h3,
+.shop-grid .shop-card:nth-child(5) p { color: #8a3f3f; } /* coral → rojo suave */
+
+.shop-grid .shop-card:nth-child(6) h3,
+.shop-grid .shop-card:nth-child(6) p { color: #7a3a5a; } /* rosa → ciruela suave */
+
+.shop-grid .shop-card:nth-child(7) h3,
+.shop-grid .shop-card:nth-child(7) p { color: #3a5a7a; } /* azul → azul grisáceo */
+
+.shop-grid .shop-card:nth-child(8) h3,
+.shop-grid .shop-card:nth-child(8) p { color: #7a6a3a; } /* beige → marrón dorado */
+
+
+/* --- BOTONES A JUEGO CON EL COLOR DEL FONDO --- */
+
+/* 1 — Amarillo suave */
+.shop-grid .shop-card:nth-child(1) .btn-ver {
+    background: #d4c400;
+    color: white;
+}
+.shop-grid .shop-card:nth-child(1) .btn-ver:hover {
+    background: #b3a700;
+}
+
+/* 2 — Melocotón suave */
+.shop-grid .shop-card:nth-child(2) .btn-ver {
+    background: #d47a5f;
+    color: white;
+}
+.shop-grid .shop-card:nth-child(2) .btn-ver:hover {
+    background: #b8664f;
+}
+
+/* 3 — Lima suave */
+.shop-grid .shop-card:nth-child(3) .btn-ver {
+    background: #a6b300;
+    color: white;
+}
+.shop-grid .shop-card:nth-child(3) .btn-ver:hover {
+    background: #8c9600;
+}
+
+/* 4 — Crema suave */
+.shop-grid .shop-card:nth-child(4) .btn-ver {
+    background: #c9a200;
+    color: white;
+}
+.shop-grid .shop-card:nth-child(4) .btn-ver:hover {
+    background: #a88700;
+}
+
+/* 5 — Coral suave */
+.shop-grid .shop-card:nth-child(5) .btn-ver {
+    background: #d46a6a;
+    color: white;
+}
+.shop-grid .shop-card:nth-child(5) .btn-ver:hover {
+    background: #b85a5a;
+}
+
+/* 6 — Rosa suave */
+.shop-grid .shop-card:nth-child(6) .btn-ver {
+    background: #c05a8c;
+    color: white;
+}
+.shop-grid .shop-card:nth-child(6) .btn-ver:hover {
+    background: #a44d78;
+}
+
+/* 7 — Azul suave */
+.shop-grid .shop-card:nth-child(7) .btn-ver {
+    background: #4a8bb8;
+    color: white;
+}
+.shop-grid .shop-card:nth-child(7) .btn-ver:hover {
+    background: #3b7399;
+}
+
+/* 8 — Beige suave */
+.shop-grid .shop-card:nth-child(8) .btn-ver {
+    background: #c2a45a;
+    color: white;
+}
+.shop-grid .shop-card:nth-child(8) .btn-ver:hover {
+    background: #a88d4d;
+}
+
+
+/* ================================
+   PANEL ADMIN – ESTILOS ESPECÍFICOS
+================================ */
+
+/* Contenedor general del admin */
+.admin-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+/* Título */
+.titulo-seccion {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+/* Botón añadir producto */
+.btn-primary {
+    background: burlywood;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.btn-primary:hover {
+    background: #caa77a;
+}
+
+/* Tabla admin */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+th {
+    background: #f3e6d8;
+    padding: 14px;
+    text-align: left;
+    font-weight: 700;
+    color: #333;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Imagen en tabla */
+.tabla-img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Botones de acciones */
+.btn-danger {
+    background: #d46a6a;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-danger:hover {
+    background: #b85a5a;
+}
+
+.btn-primary {
+    background: #caa77a;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #b38f67;
+}
+
+/* Paginación */
+.paginacion {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.paginacion nav {
+    display: inline-block;
+}
+
+.paginacion .page-link {
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 0 4px;
+    background: #f3e6d8;
+    color: #333;
+    font-weight: 600;
+}
+
+.paginacion .page-link:hover {
+    background: #e2d2c0;
+}
+
+/* Alertas */
+.alert.success {
+    background: #d4f8d4;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 5px solid #4caf50;
+}
+
+
+
+
+
+/* ============================
+   FIX DEFINITIVO DEL NAV
+============================ */
+
+/* 1. Todos los elementos del menú deben comportarse igual */
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 70px; /* AJUSTA AQUÍ LA SEPARACIÓN ENTRE PALABRAS */
+    margin-left: 0 !important;
+}
+
+/* 2. Los enlaces del menú */
+.nav a {
+    font-size: 16px;
+    font-weight: 400;
+    padding: 8px 12px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.2s ease-in-out;
+    margin: 0 !important; /* elimina márgenes antiguos */
+}
+
+.nav a:hover {
+    color: #dbab89;
+}
+
+/* 3. PRODUCTOS (dropdown) debe ser idéntico a un <a> */
+.cuenta-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.cuenta-btn {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    font-weight: 400; /* MISMO PESO QUE LOS <a> */
+    cursor: pointer;
+    color: #333;
+    padding: 8px 12px; /* MISMO PADDING QUE LOS <a> */
+    border-radius: 6px;
+    transition: 0.2s ease-in-out;
+}
+
+.cuenta-btn:hover {
+    color: #dbab89;
+}
+
+/* 4. Dropdown */
+.cuenta-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0; /* alineado con el botón */
+    background: white;
+    box-shadow: var(--shadow);
+    border-radius: 6px;
+    display: none;
+    flex-direction: column;
+    min-width: 180px;
+    z-index: 20;
+}
+
+.cuenta-dropdown:hover .cuenta-menu {
+    display: flex;
+}
+
+.cuenta-menu a {
+    padding: 10px 14px;
+    font-weight: 400;
+    color: #333;
+}
+
+.cuenta-menu a:hover {
+    color: #dbab89;
+}
+
+
+.carrito-link {
+    margin-right: -50px !important; /* AJUSTA AQUÍ LA DISTANCIA */
+}

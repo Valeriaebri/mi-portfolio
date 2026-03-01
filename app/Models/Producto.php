@@ -17,7 +17,7 @@ class Producto extends Model
         'precio',
         'stock',
         'modo_empleo',
-        'ingredinetes_inci',
+        'ingredientes_inci',
         'destacado',
         'activo',
         'categoria_id',

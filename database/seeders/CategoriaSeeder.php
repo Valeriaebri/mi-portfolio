@@ -31,5 +31,10 @@ class CategoriaSeeder extends Seeder
             'descripcion' => 'Productos de limpieza facial',
             'activo' => 1
         ]);
+        Categoria::create([
+            'id' => 4,
+            'nombre' => 'Aceites',
+            'slug' => 'aceites',
+            'activo' => 1 ]);
     }
 }
